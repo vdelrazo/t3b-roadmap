@@ -34,76 +34,109 @@ const DATA = {
   okrs: [
     {
       id: "O1", color: "#9b8fff",
-      title: "Fundamentos del equipo",
-      subtitle: "Proceso, cultura y capacidades",
+      title: "Cadencia del equipo",
+      subtitle: "Establecer la cadencia de trabajo del equipo",
       items: [
         {
-          name: "Proceso de delivery", status: "on", note: "En operación",
+          name: "KR1 — Proceso de delivery",
+          status: "on", note: "15 may",
           subtasks: [
-            { name: "PR templates por tipo de cambio",  status: "on",   note: "4 activos"   },
-            { name: "GitHub Actions automation",         status: "on",   note: "Activo"      },
-            { name: "Playbook de ingeniería v1.1",       status: "risk", note: "En revisión" },
-            { name: "Reusable workflow en estándares",   status: "risk", note: "Pendiente"   },
+            { name: "PR templates por tipo de cambio",   status: "on",   note: "4 activos"   },
+            { name: "GitHub Actions automation",          status: "on",   note: "Activo"      },
+            { name: "Playbook de ingeniería v1.1",        status: "risk", note: "En revisión" },
+            { name: "Reusable workflow en estándares",    status: "risk", note: "Pendiente"   },
           ]
         },
         {
-          name: "Onboarding equipo", status: "on", note: "Completado",
+          name: "KR2 — Onboarding Diego & David",
+          status: "risk", note: "25 abr",
           subtasks: [
-            { name: "Checklist de onboarding", status: "done", note: "Completo" },
-            { name: "Accesos y ambientes",      status: "done", note: "Completo" },
-            { name: "Demo GitHub Projects",     status: "on",   note: "En curso" },
+            { name: "Checklist de onboarding",      status: "done", note: "Completo"  },
+            { name: "Accesos y ambientes",           status: "done", note: "Completo"  },
+            { name: "Demo GitHub Projects",          status: "on",   note: "En curso"  },
+            { name: "Primer entrega en producción",  status: "on",   note: "Pendiente" },
           ]
         },
         {
-          name: "Lineamientos IA", status: "risk", note: "En adopción",
+          name: "KR3 — Lineamientos IA",
+          status: "risk", note: "30 abr",
           subtasks: [
-            { name: "Guía de uso de Copilot",          status: "done", note: "Publicada"   },
-            { name: "Prompts estándar en ai-prompts/",  status: "risk", note: "En progreso" },
-            { name: "Adopción medible por el equipo",   status: "risk", note: "Sin métrica" },
+            { name: "Guía de uso de Copilot publicada",     status: "done", note: "Publicada"   },
+            { name: "Prompts estándar en ai-prompts/",      status: "risk", note: "En progreso" },
+            { name: "Doc adopción por rol publicada",       status: "risk", note: "Pendiente"   },
+            { name: "Métrica de adopción definida (% PRs)", status: "risk", note: "Pendiente"   },
           ]
         },
       ]
     },
     {
       id: "O2", color: "#4ec9f5",
-      title: "Entrega confiable",
-      subtitle: "7 iniciativas en Q2 — primera versión en producción",
+      title: "Milestones en fecha",
+      subtitle: "Entregar el 100% de los milestones técnicos de Q2 en fecha",
       items: [
-        { name: "Orders API Platform",     status: "risk", note: "Abr 30 ⚠️",  subtasks: [] },
-        { name: "Venta Financiada Avafin", status: "on",   note: "Mayo 4",    subtasks: [] },
-        { name: "Migración CELEX",         status: "risk", note: "Mayo 15 ⚠️", subtasks: [] },
-        { name: "Kiosko Remesas",          status: "on",   note: "Mayo 15",   subtasks: [] },
-        { name: "CICO Mercado Pago",       status: "on",   note: "Jun 30",    subtasks: [] },
-        { name: "Conciliación",            status: "on",   note: "Jun 30",    subtasks: [] },
-        { name: "KMP Kotlin App",          status: "on",   note: "Jun 15",    subtasks: [] },
+        {
+          name: "KR1 — Roadmap Q2 publicado",
+          status: "on", note: "20 abr ✅",
+          subtasks: [
+            { name: "Iniciativas con owners definidos",  status: "done", note: "Completo"     },
+            { name: "Fechas por entrega confirmadas",    status: "done", note: "Completo"     },
+            { name: "Dashboard ejecutivo publicado",     status: "done", note: "Este archivo" },
+          ]
+        },
+        {
+          name: "KR2 — Entregas en fecha o re-plan",
+          status: "on", note: "≥3 días antes",
+          subtasks: [
+            { name: "Orders API Platform",     status: "risk", note: "Abr 30 ⚠️" },
+            { name: "Venta Financiada Avafin", status: "on",   note: "May 4"      },
+            { name: "Migración CELEX",         status: "risk", note: "May 15 ⚠️"  },
+            { name: "Kiosko Remesas",          status: "on",   note: "May 15"     },
+            { name: "CICO Mercado Pago",       status: "on",   note: "Jun 30"     },
+            { name: "Conciliación",            status: "on",   note: "Jun 30"     },
+            { name: "KMP Kotlin App",          status: "on",   note: "Jun 15"     },
+          ]
+        },
+        {
+          name: "KR3 — 0 blockers sin plan >24h",
+          status: "on", note: "Continuo",
+          subtasks: [
+            { name: "Proceso de escalación definido",  status: "on",   note: "Activo"     },
+            { name: "Seguimiento semanal en 1:1",      status: "on",   note: "Activo"     },
+            { name: "Orders API — Terraform dev",      status: "risk", note: "⚠️ Activo"  },
+          ]
+        },
       ]
     },
     {
       id: "O3", color: "#0fd9a0",
-      title: "Producción estable",
-      subtitle: "Calidad y prevención de incidentes",
+      title: "Quality gate",
+      subtitle: "Ser el quality gate de cada release a producción",
       items: [
         {
-          name: "Quality gate release", status: "on", note: "Definido",
+          name: "KR1 — 0 releases sin validación",
+          status: "on", note: "Continuo",
           subtasks: [
             { name: "Checklist de salida a producción",  status: "on",   note: "Activo"     },
-            { name: "Criterios de aceptación por tipo",  status: "risk", note: "En revisión" },
+            { name: "Code review obligatorio",           status: "on",   note: "Activo"     },
+            { name: "Criterios de seguridad y rollback", status: "on", note: "En revisión"},
           ]
         },
         {
-          name: "Testing automatizado", status: "risk", note: "En progreso",
+          name: "KR2 — 0 incidentes P1",
+          status: "on", note: "Sin incidentes",
           subtasks: [
-            { name: "Cobertura en módulo de pagos", status: "risk", note: "En progreso" },
-            { name: "Pipeline de pruebas en CI",    status: "risk", note: "Bloqueado"   },
-            { name: "Baseline ≥ 60% definido",      status: "on",   note: "Acordado"   },
+            { name: "Runbook de incidentes publicado", status: "on", note: "Publicado" },
+            { name: "Alertas en producción activas",   status: "on", note: "Activas"   },
+            { name: "Post-mortem process definido",    status: "on", note: "Definido"  },
           ]
         },
         {
-          name: "Prevención P1", status: "on", note: "Sin incidentes",
+          name: "KR3 — Cobertura tests ≥90%",
+          status: "risk", note: "Por módulo",
           subtasks: [
-            { name: "Runbook de incidentes", status: "on", note: "Publicado" },
-            { name: "Alertas en producción", status: "on", note: "Activas"   },
-            { name: "Post-mortem process",   status: "on", note: "Definido"  },
+            { name: "Baseline actual por módulo medido",  status: "on", note: "Sin baseline" },
+            { name: "Pipeline de pruebas en CI",          status: "risk", note: "Bloqueado"    },
+            { name: "Cobertura ≥90% en módulo de pagos",  status: "done", note: "En progreso"  },
           ]
         },
       ]
@@ -152,7 +185,7 @@ const DATA = {
         { name: "CD workflow CELEX",                                status: "done", from: "2025-04-07", to: "2025-04-18", note: "Completo",  github: "" },
         { name: "Extracción datos servicio actual (conciliación)",  status: "on",   from: "2025-04-18", to: "2025-04-25", note: "Pendiente", github: "" },
         { name: "Envío eventos a conciliación (flujo eventos)",     status: "on",   from: "2025-04-21", to: "2025-04-30", note: "Pendiente", github: "" },
-        { name: "Integración E2E en dev",                           status: "blocked", from: "2025-04-25", to: "2025-05-04", note: "⚠️ Dep Orders", github: "" },
+        { name: "Integración E2E en dev",                           status: "risk", from: "2025-04-25", to: "2025-05-04", note: "⚠️ Dep Orders", github: "" },
         { name: "Gate aprobación dirección",                        status: "on",   from: "2025-05-04", to: "2025-05-06", note: "Gate",      github: "" },
         { name: "Shadow mode → producción",                         status: "on",   from: "2025-05-06", to: "2025-05-15", note: "Pendiente", github: "" },
       ]
