@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Roadmap — Q2 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+  ✏️  EDITA SOLO ESTE BLOQUE — el resto no lo necesitas tocar
+  ============================================================
+
+  AMBAS PESTAÑAS usan el mismo patrón para subtareas:
+
+    { name: "...", status: "on", note: "...", subtasks: [ ... ] }
+
+  status:   "on" | "risk" | "blocked"
+  subtasks: lista de subtareas, o [] si no tiene
+
+  SOLO en el Roadmap, cada tarea/subtarea necesita también:
+    from:   fecha de inicio — formato "YYYY-MM-DD"  ej: "2025-04-14"
+    to:     fecha de fin    — formato "YYYY-MM-DD"  ej: "2025-05-30"
+    github: URL del epic/issue, o "" si no existe aún
+
+  Rango válido Q2: 2025-04-01 al 2025-06-29
+  ============================================================ -->
+<script>
+const DATA = {
+
+  updated: "Semana 15 · Abr 2025",
+  currentWeek: 4, // ✏️ Actualiza este número cada semana (1-13)
+
+  okrs: [
+    {
+      id: "O1", color: "#9b8fff",
+      title: "Fundamentos del equipo",
+      subtitle: "Proceso, cultura y capacidades",
+      items: [
+        {
+          name: "Proceso de delivery", status: "on", note: "En operación",
+          subtasks: [
+            { name: "PR templates por tipo de cambio",  status: "on",   note: "4 activos"   },
+            { name: "GitHub Actions automation",         status: "on",   note: "Activo"      },
+            { name: "Playbook de ingeniería v1.1",       status: "risk", note: "En revisión" },
+            { name: "Reusable workflow en estándares",   status: "risk", note: "Pendiente"   },
+          ]
+        },
+        {
+          name: "Onboarding equipo", status: "on", note: "Completado",
+          subtasks: [
+            { name: "Checklist de onboarding", status: "done", note: "Completo" },
+            { name: "Accesos y ambientes",      status: "done", note: "Completo" },
+            { name: "Demo GitHub Projects",     status: "on",   note: "En curso" },
+          ]
+        },
+        {
+          name: "Lineamientos IA", status: "risk", note: "En adopción",
+          subtasks: [
+            { name: "Guía de uso de Copilot",          status: "done", note: "Publicada"   },
+            { name: "Prompts estándar en ai-prompts/",  status: "risk", note: "En progreso" },
+            { name: "Adopción medible por el equipo",   status: "risk", note: "Sin métrica" },
+          ]
+        },
+      ]
+    },
+    {
+      id: "O2", color: "#4ec9f5",
+      title: "Entrega confiable",
+      subtitle: "7 iniciativas en Q2 — primera versión en producción",
+      items: [
+        { name: "Orders API Platform",     status: "risk", note: "Abr 30 ⚠️",  subtasks: [] },
+        { name: "Venta Financiada Avafin", status: "on",   note: "Mayo 4",    subtasks: [] },
+        { name: "Migración CELEX",         status: "risk", note: "Mayo 15 ⚠️", subtasks: [] },
+        { name: "Kiosko Remesas",          status: "on",   note: "Mayo 15",   subtasks: [] },
+        { name: "CICO Mercado Pago",       status: "on",   note: "Jun 30",    subtasks: [] },
+        { name: "Conciliación",            status: "on",   note: "Jun 30",    subtasks: [] },
+        { name: "KMP Kotlin App",          status: "on",   note: "Jun 15",    subtasks: [] },
+      ]
+    },
+    {
+      id: "O3", color: "#0fd9a0",
+      title: "Producción estable",
+      subtitle: "Calidad y prevención de incidentes",
+      items: [
+        {
+          name: "Quality gate release", status: "on", note: "Definido",
+          subtasks: [
+            { name: "Checklist de salida a producción",  status: "on",   note: "Activo"     },
+            { name: "Criterios de aceptación por tipo",  status: "risk", note: "En revisión" },
+          ]
+        },
+        {
+          name: "Testing automatizado", status: "risk", note: "En progreso",
+          subtasks: [
+            { name: "Cobertura en módulo de pagos", status: "risk", note: "En progreso" },
+            { name: "Pipeline de pruebas en CI",    status: "risk", note: "Bloqueado"   },
+            { name: "Baseline ≥ 60% definido",      status: "on",   note: "Acordado"   },
+          ]
+        },
+        {
+          name: "Prevención P1", status: "on", note: "Sin incidentes",
+          subtasks: [
+            { name: "Runbook de incidentes", status: "on", note: "Publicado" },
+            { name: "Alertas en producción", status: "on", note: "Activas"   },
+            { name: "Post-mortem process",   status: "on", note: "Definido"  },
+          ]
+        },
+      ]
+    }
+  ],
+
+  roadmap: [
+    {
+      name: "Orders API Platform",
+      owner: "Ulises",
+      status: "risk",
+      note: "Solo corre local con Docker — dev en Terraform pendiente",
+      github: "",
+      subtasks: [
+        { name: "Infraestructura base Terraform",       status: "done", from: "2025-02-03", to: "2025-03-07", note: "Completo",  github: "" },
+        { name: "Function Apps + Service Bus",          status: "done", from: "2025-02-17", to: "2025-03-21", note: "Completo",  github: "" },
+        { name: "Routing Factory / Rules Engine",       status: "done", from: "2025-03-10", to: "2025-04-04", note: "Completo",  github: "" },
+        { name: "CD pipelines por servicio",            status: "on",   from: "2025-04-01", to: "2025-04-18", note: "En curso",  github: "" },
+        { name: "Despliegue a dev con Terraform",       status: "risk", from: "2025-04-14", to: "2025-04-25", note: "⚠️ Blocker", github: "" },
+        { name: "Despliegue base en producción",        status: "risk", from: "2025-04-25", to: "2025-04-30", note: "Depende dev", github: "" },
+      ]
+    },
+    {
+      name: "Venta Financiada Avafin",
+      owner: "Erick / Ulises",
+      status: "on",
+      note: "Validación de códigos de financiamiento",
+      github: "",
+      subtasks: [
+        { name: "Diseño contrato API (OpenAPI)",                        status: "done", from: "2025-03-06", to: "2025-03-14", note: "Completo",  github: "" },
+        { name: "Implementación endpoint validación",                   status: "done", from: "2025-03-14", to: "2025-04-04", note: "Completo",  github: "" },
+        { name: "Integración con Avafin",                               status: "done", from: "2025-04-01", to: "2025-04-11", note: "Completo",  github: "" },
+        { name: "Conexión API actual con nuevo endpoint Avafin (online)",status: "on",   from: "2025-04-14", to: "2025-04-25", note: "En curso",  github: "" },
+        { name: "Despliegue a producción",                              status: "on",   from: "2025-04-25", to: "2025-05-04", note: "Pendiente", github: "" },
+      ]
+    },
+    {
+      name: "Migración CELEX",
+      owner: "Erick",
+      status: "risk",
+      note: "Endpoint recarga a arquitectura event-driven",
+      github: "",
+      subtasks: [
+        { name: "Mock CELEX local (Etapa 0)",                      status: "done", from: "2025-03-27", to: "2025-04-11", note: "Completo",  github: "" },
+        { name: "Fix code gaps (dependency + TODO + registro)",     status: "done", from: "2025-04-01", to: "2025-04-18", note: "Completo",  github: "" },
+        { name: "CD workflow CELEX",                                status: "done", from: "2025-04-07", to: "2025-04-18", note: "Completo",  github: "" },
+        { name: "Extracción datos servicio actual (conciliación)",  status: "on",   from: "2025-04-18", to: "2025-04-25", note: "Pendiente", github: "" },
+        { name: "Envío eventos a conciliación (flujo eventos)",     status: "on",   from: "2025-04-21", to: "2025-04-30", note: "Pendiente", github: "" },
+        { name: "Integración E2E en dev",                           status: "blocked", from: "2025-04-25", to: "2025-05-04", note: "⚠️ Dep Orders", github: "" },
+        { name: "Gate aprobación dirección",                        status: "on",   from: "2025-05-04", to: "2025-05-06", note: "Gate",      github: "" },
+        { name: "Shadow mode → producción",                         status: "on",   from: "2025-05-06", to: "2025-05-15", note: "Pendiente", github: "" },
+      ]
+    },
+    {
+      name: "Kiosko Remesas",
+      owner: "Erick",
+      status: "on",
+      note: "Servicios backend de operación de remesas",
+      github: "",
+      subtasks: [
+        { name: "Diseño contrato API",                  status: "on",   from: "2025-04-13", to: "2025-04-18", note: "En curso",  github: "" },
+        { name: "Implementación servicios backend",     status: "on",   from: "2025-04-18", to: "2025-05-02", note: "Pendiente", github: "" },
+        { name: "Integración con proveedor remesas",    status: "on",   from: "2025-04-25", to: "2025-05-09", note: "Pendiente", github: "" },
+        { name: "Flujo operacional con puntos de venta",status: "on",   from: "2025-04-28", to: "2025-05-09", note: "Pendiente", github: "" },
+        { name: "Comunicación con puntos de venta",     status: "on",   from: "2025-05-05", to: "2025-05-12", note: "Pendiente", github: "" },
+        { name: "Pruebas E2E",                          status: "on",   from: "2025-05-09", to: "2025-05-12", note: "Pendiente", github: "" },
+        { name: "Despliegue a producción",              status: "on",   from: "2025-05-12", to: "2025-05-15", note: "Pendiente", github: "" },
+      ]
+    },
+    {
+      name: "CICO Mercado Pago",
+      owner: "Erick",
+      status: "on",
+      note: "Cash in / cash out operando en producción",
+      github: "",
+      subtasks: [
+        { name: "Integración SDK MercadoPago",  status: "done", from: "2025-03-09", to: "2025-03-28", note: "Completo",  github: "" },
+        { name: "Implementación cash-in",        status: "done", from: "2025-03-28", to: "2025-04-18", note: "Completo",  github: "" },
+        { name: "Implementación cash-out",       status: "done", from: "2025-04-14", to: "2025-04-25", note: "Completo",  github: "" },
+        { name: "Despliegue a ambiente dev",     status: "on",   from: "2025-04-21", to: "2025-04-30", note: "En curso",  github: "" },
+        { name: "Pruebas E2E en dev",            status: "on",   from: "2025-04-25", to: "2025-05-30", note: "En curso — MercadoPago respondiendo", github: "" },
+        { name: "Despliegue a producción",       status: "on",   from: "2025-06-06", to: "2025-06-30", note: "Pendiente", github: "" },
+      ]
+    },
+    {
+      name: "Conciliación",
+      owner: "Héctor",
+      status: "on",
+      note: "TAE/PDS + Remesas + MercadoPago",
+      github: "",
+      subtasks: [
+        { name: "Diseño motor de conciliación", status: "on",   from: "2025-04-13", to: "2025-04-25", note: "En curso",  github: "" },
+        { name: "Implementación TAE / PDS",     status: "on",   from: "2025-04-21", to: "2025-05-16", note: "Pendiente", github: "" },
+        { name: "Implementación Remesas",       status: "on",   from: "2025-05-09", to: "2025-05-30", note: "Pendiente", github: "" },
+        { name: "Implementación MercadoPago",   status: "on",   from: "2025-05-26", to: "2025-06-13", note: "Pendiente", github: "" },
+        { name: "Pruebas y validación",         status: "on",   from: "2025-06-09", to: "2025-06-20", note: "Pendiente", github: "" },
+        { name: "Despliegue a producción",      status: "on",   from: "2025-06-20", to: "2025-06-30", note: "Pendiente", github: "" },
+      ]
+    },
+    {
+      name: "KMP Kotlin App",
+      owner: "David / Diego",
+      status: "on",
+      note: "Core + remesas en modo kiosko",
+      github: "",
+      subtasks: [
+        { name: "Setup proyecto KMP",             status: "on",   from: "2025-04-06", to: "2025-04-18", note: "En curso",  github: "" },
+        { name: "Core compartido Android/iOS",    status: "on",   from: "2025-04-14", to: "2025-05-09", note: "Pendiente", github: "" },
+        { name: "Feature remesas (kiosko)",       status: "on",   from: "2025-04-28", to: "2025-05-23", note: "Pendiente", github: "" },
+        { name: "QA Android + Kiosko",            status: "on",   from: "2025-05-19", to: "2025-06-06", note: "Pendiente", github: "" },
+        { name: "Release Android kiosko",         status: "on",   from: "2025-06-02", to: "2025-06-15", note: "Pendiente", github: "" },
+      ]
+    },
+  ]
+}
+</script>
+<!-- ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#09090f;--surface:#12121e;--surface2:#1b1b2a;
+  --border:rgba(255,255,255,0.08);--text:#f2f2fa;--muted:#8888b0;
+  --on:#0fd9a0;--risk:#f5a623;--blocked:#ff4d6a;--accent:#6b8fff;--done:#555570;--done-text:#8888b0;
+}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;min-height:100vh;padding-bottom:60px}
+
+.hdr{padding:30px 40px 0;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--border)}
+.hdr h1{font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.3px}
+.hdr p{font-size:12px;color:var(--muted);margin-top:4px}
+.qbadge{background:var(--surface2);color:var(--accent);border:1px solid rgba(107,143,255,.25);font-size:11px;font-weight:700;padding:6px 16px;border-radius:20px;letter-spacing:.8px;white-space:nowrap;margin-top:6px}
+
+.tabs{display:flex;padding:0 40px;border-bottom:1px solid var(--border)}
+.tab{padding:15px 22px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;user-select:none}
+.tab.active{color:#fff;border-bottom-color:var(--accent)}
+.tab:hover:not(.active){color:var(--text)}
+
+.main{padding:28px 40px;}
+.stamp{font-size:11px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stamp::before{content:'●';color:var(--on);font-size:8px}
+.view{display:none}.view.active{display:block}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+.mc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 22px;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.mc.on::before{background:var(--on)}.mc.risk::before{background:var(--risk)}
+.mc.bl::before{background:var(--blocked)}.mc.ok::before{background:var(--accent)}
+.mv{font-size:42px;font-weight:900;line-height:1;letter-spacing:-2px}
+.mc.on .mv{color:var(--on)}.mc.risk .mv{color:var(--risk)}.mc.bl .mv{color:var(--blocked)}.mc.ok .mv{color:var(--accent)}
+.ml{font-size:11px;color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:.8px;font-weight:700}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge.on{background:rgba(15,217,160,.12);color:var(--on)}
+.badge.risk{background:rgba(245,166,35,.12);color:var(--risk)}
+.badge.blocked{background:rgba(255,77,106,.12);color:var(--blocked)}
+.badge.done{background:rgba(85,85,112,.2);color:var(--done-text)}
+.badge.sm{font-size:10px;padding:3px 9px}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* sub-count pill */
+.sub-count{display:inline-flex;align-items:center;background:rgba(255,255,255,.07);color:var(--muted);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:4px;flex-shrink:0}
+.pct-pill{display:inline-flex;align-items:center;gap:5px;margin-left:auto;flex-shrink:0}
+.pct-track{width:48px;height:5px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.pct-fill{height:100%;border-radius:10px;transition:width .4s ease}
+.pct-num{font-size:10px;font-weight:800;color:var(--muted);min-width:26px;text-align:right}
+
+/* chevron */
+.chevron{font-size:12px;color:var(--muted);transition:transform .2s;flex-shrink:0;line-height:1;width:14px}
+.open > .okr-parent-row .chevron,
+.open > .rm-parent .chevron { transform:rotate(90deg) }
+
+/* ── OKR GROUPS ── */
+.okrg{margin-bottom:20px;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.okrh{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--surface);border-bottom:1px solid var(--border)}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.okrh h3{font-size:14px;font-weight:800}
+.okr-sub{font-size:11px;color:var(--muted);font-weight:600;margin-left:6px}
+.okrd{font-size:11px;color:var(--muted);margin-left:auto;font-weight:600;white-space:nowrap}
+
+/* OKR item wrapper — handles parent + subtasks together */
+.okr-item{border-bottom:1px solid var(--border)}
+.okr-item:last-child{border-bottom:none}
+
+/* OKR parent row */
+.okr-parent-row{
+  display:grid;grid-template-columns:240px 1fr 125px 110px;
+  gap:16px;align-items:center;
+  padding:13px 20px;
+  transition:background .15s;cursor:pointer;
+}
+.okr-parent-row:hover{background:rgba(255,255,255,.025)}
+.okr-pname{font-size:13px;font-weight:800;display:flex;align-items:center;gap:8px}
+.okr-impact{font-size:12px;color:var(--muted);line-height:1.5;font-weight:500}
+.okr-note{font-size:11px;color:var(--muted);text-align:right;font-weight:600}
+
+/* OKR subtask list */
+.okr-subtasks{display:none;background:rgba(0,0,0,.2);border-top:1px solid var(--border)}
+.okr-item.open .okr-subtasks{display:block}
+
+/* OKR subtask row */
+.okr-sub-row{
+  display:grid;grid-template-columns:240px 1fr 125px 110px;
+  gap:16px;align-items:center;
+  padding:10px 20px 10px 50px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:background .15s;
+}
+.okr-sub-row:last-child{border-bottom:none}
+.okr-sub-row:hover{background:rgba(255,255,255,.02)}
+.okr-sname{font-size:12px;font-weight:600;color:rgba(242,242,250,.75);display:flex;align-items:center;gap:7px}
+.sub-icon{font-size:9px;color:var(--muted)}
+.okr-snote{font-size:11px;color:var(--muted);text-align:right;font-weight:500}
+
+
+/* Progress bar */
+.prog-wrap{display:flex;align-items:center;gap:10px;padding:10px 20px 12px;border-top:1px solid var(--border);background:rgba(0,0,0,.15)}
+.prog-track{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:10px;transition:width .4s ease;background:var(--on)}
+.prog-fill.risk{background:var(--risk)}
+.prog-fill.blocked{background:var(--blocked)}
+.prog-label{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap;min-width:36px;text-align:right}
+.prog-label span{color:var(--text)}
+
+/* OKR progress */
+.okr-prog-wrap{display:flex;align-items:center;gap:10px;padding:8px 14px 10px 50px;border-top:1px solid rgba(255,255,255,.04);background:rgba(0,0,0,.1)}
+.okr-prog-track{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:10px;overflow:hidden}
+.okr-prog-fill{height:100%;border-radius:10px;transition:width .4s ease}
+.okr-prog-label{font-size:10px;font-weight:800;color:var(--muted);white-space:nowrap;min-width:32px;text-align:right}
+
+/* ── ROADMAP ── */
+:root{--col-name:190px;--col-status:110px;--col-owner:110px;--col-note:140px;--col-gh:44px}
+
+.roadmap-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px}
+.roadmap-table{min-width:960px;width:100%}
+
+.rm-head{display:flex;background:var(--surface);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:4}
+.rm-col-name{flex:0 0 var(--col-name);padding:10px 16px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-right:1px solid var(--border)}
+.rm-col-status{flex:0 0 var(--col-status);padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-right:1px solid var(--border)}
+.rm-weeks{display:flex;flex:1}
+.rm-week{flex:1;padding:6px 2px;text-align:center;border-right:1px solid var(--border)}
+.rm-week:last-child{border-right:none}
+.rm-week-label{font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;display:block;line-height:1.2}
+.rm-week-date{font-size:9px;color:rgba(255,255,255,.2);font-weight:600;display:block;margin-top:1px}
+.rm-week.cw{background:rgba(107,143,255,.14);border-left:2px solid var(--accent);border-right:2px solid var(--accent);margin:0 -1px;position:relative}
+.rm-week.cw .rm-week-label{color:#fff;font-size:10px;font-weight:900}
+.rm-week.cw .rm-week-date{color:var(--accent);opacity:1;font-weight:700}
+.rm-week.cw::after{content:'▼ HOY';display:block;font-size:7px;font-weight:900;color:var(--accent);letter-spacing:1px;text-align:center;margin-top:2px}
+.rm-cell.cw{background:rgba(107,143,255,.1);box-shadow:inset 2px 0 0 rgba(107,143,255,.4),inset -2px 0 0 rgba(107,143,255,.4)}
+.rm-col-note{flex:0 0 var(--col-note);padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-left:1px solid var(--border)}
+.rm-col-gh{flex:0 0 var(--col-gh);border-left:1px solid var(--border)}
+.rm-col-owner{flex:0 0 var(--col-owner);padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);border-right:1px solid var(--border)}
+
+.rm-parent{display:flex;align-items:center;border-bottom:1px solid var(--border);background:var(--surface);cursor:pointer;transition:background .15s}
+.rm-parent:hover{background:var(--surface2)}
+.rm-parent.open{border-bottom:none}
+.rm-parent-name{flex:0 0 var(--col-name);padding:13px 12px 13px 16px;font-size:13px;font-weight:800;border-right:1px solid var(--border);display:flex;align-items:center;gap:8px;color:var(--text)}
+.rm-parent-status{flex:0 0 var(--col-status);padding:13px 12px;border-right:1px solid var(--border);display:flex;align-items:center}
+.rm-parent-cells{display:flex;flex:1;align-items:center;padding:11px 0}
+.rm-parent-owner{flex:0 0 var(--col-owner);padding:13px 12px;font-size:12px;font-weight:700;color:var(--text);border-right:1px solid var(--border)}
+.rm-parent-note{flex:0 0 var(--col-note);padding:13px 12px;font-size:11px;color:var(--muted);font-weight:600;border-left:1px solid var(--border)}
+.rm-parent-gh{flex:0 0 var(--col-gh);padding:10px 7px;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+
+.rm-subtasks{border-bottom:1px solid var(--border);background:rgba(0,0,0,.25);display:none}
+.rm-parent.open + .rm-subtasks{display:block}
+
+.rm-sub{display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s}
+.rm-sub:last-child{border-bottom:none}
+.rm-sub:hover{background:rgba(255,255,255,.02)}
+.rm-sub-name{flex:0 0 var(--col-name);padding:10px 12px 10px 36px;font-size:12px;font-weight:600;border-right:1px solid var(--border);color:rgba(242,242,250,.75);display:flex;align-items:center;gap:8px}
+.rm-sub-status{flex:0 0 var(--col-status);padding:10px 12px;border-right:1px solid var(--border);display:flex;align-items:center}
+.rm-sub-cells{display:flex;flex:1;align-items:center;padding:9px 0}
+.rm-sub-owner{flex:0 0 var(--col-owner);padding:10px 12px;font-size:11px;color:var(--muted);font-weight:500;border-right:1px solid var(--border)}
+.rm-sub-note{flex:0 0 var(--col-note);padding:10px 12px;font-size:11px;color:var(--muted);font-weight:500;border-left:1px solid var(--border)}
+.rm-sub-gh{flex:0 0 var(--col-gh);padding:8px 7px;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+
+/* cells */
+.rm-cell{flex:1;height:10px;padding:0 2px;border-right:1px solid rgba(255,255,255,.035)}
+.rm-cell:last-child{border-right:none}
+.rm-cell.cw{background:rgba(107,143,255,.12);box-shadow:inset 1px 0 0 rgba(107,143,255,.3),inset -1px 0 0 rgba(107,143,255,.3)}
+.cell-fill{width:100%;height:100%;border-radius:3px}
+.cell-empty{width:100%;height:100%;border-radius:3px;background:rgba(255,255,255,.05)}
+.cell-on{background:var(--on)}.cell-risk{background:var(--risk)}.cell-blocked{background:var(--blocked)}
+.rm-sub .rm-cell{height:8px}
+.rm-sub .cell-fill{height:8px;opacity:.75}
+
+/* gh button */
+.gh-btn{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);text-decoration:none;transition:all .2s;cursor:pointer;position:relative}
+.gh-btn:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.gh-btn.pending{opacity:.28}
+.gh-btn .tip{position:absolute;right:36px;top:50%;transform:translateY(-50%);background:var(--surface2);border:1px solid var(--border);padding:6px 10px;border-radius:8px;font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:10}
+.gh-btn:hover .tip{opacity:1}
+
+/* today */
+.today-marker{display:inline-flex;align-items:center;gap:6px;background:rgba(107,143,255,.15);color:var(--accent);border:1px solid rgba(107,143,255,.25);padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-left:auto}
+.today-marker::before{content:'●';font-size:7px}
+
+/* legend */
+.legend{display:flex;gap:20px;margin-top:16px;padding:0 4px}
+.leg-item{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);font-weight:600}
+.leg-bar{width:24px;height:8px;border-radius:3px}
+
+/* ── RESPONSIVE ── */
+
+/* Tablet (≤900px) — reduce padding, hide secondary cols */
+@media(max-width:900px){
+  .hdr,.tabs,.main{padding-left:20px;padding-right:20px}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  /* OKRs: hide impact column */
+  .okr-parent-row,.okr-sub-row{grid-template-columns:1fr 120px 110px}
+  .okr-impact{display:none}
+  /* Roadmap: hide notes col */
+  :root{--col-note:0px;--col-owner:0px}
+  .rm-parent-note,.rm-sub-note,.rm-col-note,.rm-parent-owner,.rm-sub-owner,.rm-col-owner{display:none}
+}
+
+/* Mobile (≤600px) — card layout for OKRs, scroll hint for roadmap */
+@media(max-width:600px){
+  .hdr{padding:20px 16px 0;flex-wrap:wrap;gap:10px}
+  .hdr h1{font-size:18px}
+  .qbadge{margin-top:0}
+  .tabs,.main{padding-left:14px;padding-right:14px}
+  .tab{padding:13px 14px;font-size:12px}
+
+  /* Metrics — 2x2 grid, smaller numbers */
+  .metrics{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+  .mv{font-size:32px}
+  .ml{font-size:10px}
+  .mc{padding:16px 16px}
+
+  /* OKR group header */
+  .okrh{padding:12px 14px;flex-wrap:wrap;gap:8px}
+  .okrh h3{font-size:13px}
+  .okr-sub{display:none}
+  .okrd{margin-left:0;width:100%;font-size:10px}
+
+  /* OKR parent row — stack vertically */
+  .okr-parent-row{
+    grid-template-columns:1fr auto;
+    gap:8px;padding:12px 14px;
+  }
+  .okr-pname{font-size:12px;grid-column:1}
+  .okr-impact,.okr-note{display:none}
+  /* badge goes to second column */
+
+  /* OKR subtask row */
+  .okr-sub-row{
+    grid-template-columns:1fr auto;
+    gap:8px;padding:10px 14px 10px 36px;
+  }
+  .okr-sname{font-size:11px}
+  .okr-snote{display:none}
+
+  /* Roadmap — show scroll hint, tighten columns */
+  :root{--col-name:150px;--col-status:100px;--col-gh:36px}
+  .roadmap-wrap{border-radius:12px}
+  .roadmap-wrap::after{
+    content:'← desliza →';
+    display:block;text-align:center;
+    font-size:10px;color:var(--muted);
+    padding:8px;font-weight:600;
+    background:var(--surface);
+    border-top:1px solid var(--border);
+    border-radius:0 0 12px 12px;
+  }
+  .rm-parent-name,.rm-sub-name{font-size:11px;padding-left:12px}
+  .rm-sub-name{padding-left:26px}
+  .rm-week-date{display:none}
+  .rm-week-label{font-size:8px}
+
+  /* Legend wraps */
+  .legend{flex-wrap:wrap;gap:12px}
+
+  /* stamp */
+  .stamp{font-size:10px;flex-direction:column;align-items:flex-start;gap:6px}
+  .today-marker{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <h1>Engineering Roadmap</h1>
+    <p>Tiendas 3B · Equipo de desarrollo</p>
+  </div>
+  <div class="qbadge">Q2 2025</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw('dash')">OKRs Anuales</div>
+  <div class="tab" onclick="sw('road')">Roadmap Q2</div>
+</div>
+
+<div class="main">
+  <div id="dash" class="view active"></div>
+  <div id="road" class="view"></div>
+</div>
+
+<script>
+const WEEKS=[
+  {l:"S1",d:"Abr 4"},{l:"S2",d:"Abr 11"},{l:"S3",d:"Abr 18"},{l:"S4",d:"Abr 25"},
+  {l:"S5",d:"May 2"},{l:"S6",d:"May 9"},{l:"S7",d:"May 16"},{l:"S8",d:"May 23"},
+  {l:"S9",d:"May 30"},{l:"S10",d:"Jun 6"},{l:"S11",d:"Jun 13"},{l:"S12",d:"Jun 20"},
+  {l:"S13",d:"Jun 27"}
+];
+const Q2_START = new Date("2025-04-01");
+
+// Acepta "YYYY-MM-DD" o número de semana (1-13) por compatibilidad
+function toWeek(val){
+  if(typeof val === 'number') return Math.max(1, Math.min(13, val));
+  const d = new Date(val + "T00:00:00");
+  const diff = Math.floor((d - Q2_START) / (7*24*60*60*1000));
+  return Math.max(1, Math.min(13, diff + 1));
+}
+const CW = (DATA.currentWeek >= 1 && DATA.currentWeek <= 13) ? DATA.currentWeek : (() => {
+  const diff=Math.floor((Q2_START - new Date())/(7*24*60*60*1000));
+  return Math.max(1,Math.min(13,Math.abs(diff)+1));
+})();
+const SL={on:"On Track",risk:"At Risk",blocked:"Blocked",done:"Completado"};
+function badge(s,sm){return `<span class="badge ${s}${sm?' sm':''}">${SL[s]}</span>`;}
+function ghBtn(url){
+  if(url) return `<a class="gh-btn" href="${url}" target="_blank">⌥<span class="tip">Abrir en GitHub</span></a>`;
+  return `<a class="gh-btn pending">⌥<span class="tip">Epic pendiente</span></a>`;
+}
+function cellsFor(fromRaw, toRaw, status){
+  const from=toWeek(fromRaw), to=toWeek(toRaw);
+  return WEEKS.map((_,i)=>{
+    const w=i+1,active=w>=from&&w<=to,isCW=w===CW;
+    if(!active) return `<div class="rm-cell${isCW?' cw':''}"><div class="cell-empty"></div></div>`;
+    const isS=w===from,isE=w===to;
+    const r=isS&&isE?'border-radius:5px':isS?'border-radius:5px 2px 2px 5px':isE?'border-radius:2px 5px 5px 2px':'border-radius:1px';
+    return `<div class="rm-cell${isCW?' cw':''}"><div class="cell-fill cell-${status}" style="${r}"></div></div>`;
+  }).join('');
+}
+
+// Calcula % de completado basado en subtareas con status "done"
+function calcPct(subtasks){
+  if(!subtasks||subtasks.length===0) return 0;
+  const done=subtasks.filter(s=>s.status==='done').length;
+  return Math.round((done/subtasks.length)*100);
+}
+// Celdas de tarea completada (gris rayado)
+function cellsDone(from,to){
+  return WEEKS.map((_,i)=>{
+    const w=i+1,active=w>=from&&w<=to,isCW=w===CW;
+    if(!active) return `<div class="rm-cell${isCW?' cw':''}"><div class="cell-empty"></div></div>`;
+    const isS=w===from,isE=w===to;
+    const r=isS&&isE?'border-radius:5px':isS?'border-radius:5px 2px 2px 5px':isE?'border-radius:2px 5px 5px 2px':'border-radius:1px';
+    return `<div class="rm-cell${isCW?' cw':''}"><div class="cell-fill" style="${r};background:var(--done)"></div></div>`;
+  }).join('');
+}
+
+// ── OKRs ──────────────────────────────────────────────────────
+function renderDash(){
+  // Count all top-level items for metrics
+  let on=0,risk=0,blocked=0;
+  DATA.okrs.forEach(o=>o.items.forEach(i=>{
+    if(i.status==='done'||i.status==='on')on++; else if(i.status==='risk')risk++; else blocked++;
+  }));
+
+  let h=`<div class="stamp">Objetivos anuales 2025 · ${DATA.updated}</div>
+    <div class="metrics">
+      <div class="mc on"><div class="mv">${on}</div><div class="ml">On Track</div></div>
+      <div class="mc risk"><div class="mv">${risk}</div><div class="ml">At Risk</div></div>
+      <div class="mc bl"><div class="mv">${blocked}</div><div class="ml">Blocked</div></div>
+      <div class="mc ok"><div class="mv">${DATA.okrs.length}</div><div class="ml">OKRs Activos</div></div>
+    </div>`;
+
+  DATA.okrs.forEach((okr,oi)=>{
+    const c=okr.items.reduce((a,i)=>{a[i.status]=(a[i.status]||0)+1;return a},{});
+    const sum=Object.entries(c).map(([s,n])=>`${n} ${SL[s].toLowerCase()}`).join(' · ');
+    h+=`<div class="okrg">
+      <div class="okrh">
+        <div class="dot" style="background:${okr.color}"></div>
+        <h3>${okr.id} — ${okr.title} <span class="okr-sub">${okr.subtitle}</span></h3>
+        <span class="okrd">${sum}</span>
+      </div>`;
+
+    okr.items.forEach((item,ii)=>{
+      const hasSubs=item.subtasks&&item.subtasks.length>0;
+      const id=`okr-${oi}-${ii}`;
+      const pct=hasSubs?calcPct(item.subtasks):null;
+      h+=`<div class="okr-item" id="${id}">
+        <div class="okr-parent-row" onclick="${hasSubs?`toggleOkr('${id}')`:''}">
+          <div class="okr-pname">
+            <span class="chevron">${hasSubs?'›':''}</span>
+            ${item.name}
+            ${hasSubs?`<span class="sub-count">${item.subtasks.length}</span>`:''}
+          </div>
+          <div class="okr-impact">${item.impact||''}</div>
+          <div>${badge(item.status)}</div>
+          <div class="okr-note">${item.note||''}</div>
+        </div>`;
+
+      if(hasSubs){
+        h+=`<div class="okr-subtasks">`;
+        item.subtasks.forEach(sub=>{
+          h+=`<div class="okr-sub-row">
+            <div class="okr-sname"><span class="sub-icon">◦</span>${sub.name}</div>
+            <div class="okr-impact" style="font-size:11px;color:var(--muted)">${sub.impact||''}</div>
+            <div>${badge(sub.status,true)}</div>
+            <div class="okr-snote">${sub.note||''}</div>
+          </div>`;
+        });
+        h+=`<div class="okr-prog-wrap">
+          <div class="okr-prog-track"><div class="okr-prog-fill" style="width:${pct}%;background:${pct===100?'var(--on)':pct>50?'var(--accent)':'var(--risk)'}"></div></div>
+          <div class="okr-prog-label">${pct}%</div>
+        </div>`;
+        h+=`</div>`;
+      }
+      h+=`</div>`;
+    });
+    h+=`</div>`;
+  });
+
+  document.getElementById('dash').innerHTML=h;
+}
+
+// ── Roadmap ────────────────────────────────────────────────────
+function renderRoad(){
+  const whdr=WEEKS.map((w,i)=>`
+    <div class="rm-week${i+1===CW?' cw':''}">
+      <span class="rm-week-label">${w.l}</span>
+      <span class="rm-week-date">${w.d}</span>
+    </div>`).join('');
+
+  let rows='';
+  DATA.roadmap.forEach((task,ti)=>{
+    const hasSubs=task.subtasks&&task.subtasks.length>0;
+    const from=hasSubs?Math.min(...task.subtasks.map(s=>toWeek(s.from))):toWeek(task.from);
+    const to=hasSubs?Math.max(...task.subtasks.map(s=>toWeek(s.to))):toWeek(task.to);
+
+    rows+=`<div class="rm-parent${hasSubs?' has-subs':''}" id="rm-${ti}" onclick="${hasSubs?`toggleRm(${ti})`:''}">
+      <div class="rm-parent-name">
+        <span class="chevron">${hasSubs?'›':''}</span>
+        ${task.name}
+        ${hasSubs?`<span class="sub-count">${task.subtasks.length}</span>`:''}
+
+      </div>
+      <div class="rm-parent-status">${badge(task.status)}</div>
+      <div class="rm-parent-owner">${task.owner||''}</div>
+      <div class="rm-parent-cells">${cellsFor(from,to,task.status)}</div>
+      <div class="rm-parent-note">${task.note||''}</div>
+      <div class="rm-parent-gh">${ghBtn(task.github)}</div>
+    </div>`;
+
+    if(hasSubs){
+      const pct=calcPct(task.subtasks);
+      rows+=`<div class="rm-subtasks" id="rsubs-${ti}">`;
+      task.subtasks.forEach(sub=>{
+        const isDone=sub.status==='done';
+        rows+=`<div class="rm-sub" style="${isDone?'opacity:.55':''}">
+          <div class="rm-sub-name"><span class="sub-icon">${isDone?'✓':'◦'}</span>${sub.name}</div>
+          <div class="rm-sub-status">${badge(sub.status,true)}</div>
+          <div class="rm-sub-owner"></div>
+          <div class="rm-sub-cells">${isDone?cellsDone(toWeek(sub.from),toWeek(sub.to)):cellsFor(sub.from,sub.to,sub.status)}</div>
+          <div class="rm-sub-note">${sub.note||''}</div>
+          <div class="rm-sub-gh">${ghBtn(sub.github)}</div>
+        </div>`;
+      });
+      rows+=`<div class="prog-wrap">
+        <div class="prog-track"><div class="prog-fill ${pct<50?'risk':''}" style="width:${pct}%"></div></div>
+        <div class="prog-label"><span>${pct}%</span> completado</div>
+      </div>`;
+      rows+=`</div>`;
+    }
+  });
+
+  const today=new Date().toLocaleDateString('es-MX',{day:'numeric',month:'short'});
+  document.getElementById('road').innerHTML=`
+    <div class="stamp">
+      Roadmap Q2 · Granularidad semanal
+      <span class="today-marker">Hoy: ${today} · S${CW}</span>
+    </div>
+    <div class="roadmap-wrap"><div class="roadmap-table">
+      <div class="rm-head">
+        <div class="rm-col-name">Tarea / Subtarea</div>
+        <div class="rm-col-status">Estado</div>
+        <div class="rm-col-owner">Owner</div>
+        <div class="rm-weeks">${whdr}</div>
+        <div class="rm-col-note">Notas</div>
+        <div class="rm-col-gh"></div>
+      </div>
+      ${rows}
+    </div></div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-bar" style="background:var(--on)"></div>On Track</div>
+      <div class="leg-item"><div class="leg-bar" style="background:var(--risk)"></div>At Risk</div>
+      <div class="leg-item"><div class="leg-bar" style="background:var(--blocked)"></div>Blocked</div>
+      <div class="leg-item"><div class="leg-bar" style="background:rgba(255,255,255,.05)"></div>Sin actividad</div>
+    </div>`;
+}
+
+// ── Toggle helpers ─────────────────────────────────────────────
+function toggleOkr(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+function toggleRm(ti){
+  const parent=document.getElementById(`rm-${ti}`);
+  const subs=document.getElementById(`rsubs-${ti}`);
+  const open=parent.classList.toggle('open');
+  subs.style.display=open?'block':'none';
+}
+function sw(v){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&v==='dash')||(i===1&&v==='road')));
+  document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id===v));
+}
+
+renderDash();
+renderRoad();
+</script>
+</body>
+</html>
